@@ -45,6 +45,7 @@ func main() {
 			Option2Name:  "",
 			Option2Value: "",
 			Image:        "",
+			Price:        "",
 		}
 		otherRow, err = wbSheet.Row(otherRowsIndex)
 		if err != nil || otherRow == nil {
@@ -65,10 +66,6 @@ func main() {
 	}
 
 	fmt.Printf("the length is %v: \n", len(productsUploaded))
-
-	//for i, j := range productsUploaded {
-	//	fmt.Printf("%v title length is: %v \n", i, len(j.Title))
-	//}
 
 	convertToWoocommerceSyntax(productsUploaded)
 }

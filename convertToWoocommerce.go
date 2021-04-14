@@ -19,15 +19,11 @@ func convertToWoocommerceSyntax(shopifyProducts []shopifyProducts) {
 	for i, sP := range shopifyProducts {
 		isParent := make(map[int]bool)
 
-		//fmt.Printf("line 23 ==> lastParentIndex: %v \n", lastParentIndex[0])
-
 		if len(shopifyProducts[i].Title) > 5 {
 			isParent[0] = true
 			productsNo++
 			s := strings.Split(sP.Handle, "-")
 			sku = s[len(s)-1]
-
-			//fmt.Printf("sku for product no %v is %v", i, s[len(s) - 1])
 
 			// update the last parent index and all
 			if lastParentIndex > 0 {
@@ -44,7 +40,6 @@ func convertToWoocommerceSyntax(shopifyProducts []shopifyProducts) {
 		} else {
 			isParent[0] = false
 			// start concatenating the attribute values
-			//if lastParentIndex > 0 {
 			if sP.Option1Value != "" {
 				var b bytes.Buffer
 				if !strings.Contains(attributes1, sP.Option1Value) {
@@ -67,7 +62,6 @@ func convertToWoocommerceSyntax(shopifyProducts []shopifyProducts) {
 					attributes2 = c.String()
 				}
 			}
-			//}
 		}
 
 		wP := wooCommerceProducts{
@@ -90,8 +84,6 @@ func convertToWoocommerceSyntax(shopifyProducts []shopifyProducts) {
 			Attribute2Visibility: "0",
 			Attribute2Global:     "1",
 		}
-
-		//fmt.Printf("isParent: %v \n", isParent[0])
 
 		if isParent[0] {
 			wP.Type = "variable"
@@ -159,12 +151,5 @@ func createWoocommerceCSV(products []wooCommerceProducts) {
 		}
 	}
 
-	//w := csv.NewWriter(f)
 	defer writer.Flush()
-
-	//for _, record := range records {
-	//	if err := w.Write(record); err != nil {
-	//		log.Fatalln("error writing record to file", err)
-	//	}
-	//}
 }
