@@ -1,6 +1,6 @@
 package main
 
-import "github.com/tealeg/xlsx"
+import "github.com/tealeg/xlsx/v3"
 
 func NewShopifyExcel() *ExcelObject {
 	cells := map[string]ExcelCell{
@@ -40,6 +40,10 @@ func NewShopifyExcel() *ExcelObject {
 			Name:        FieldPrice,
 			Description: "Price",
 		},
+		FieldCategory: {
+			Name:        FieldCategory,
+			Description: "Category",
+		},
 	}
 	return &ExcelObject{Cells: cells}
 }
@@ -68,6 +72,8 @@ func (eO *ExcelObject) ParseShopifyProducts(product shopifyProducts, key string,
 		product.Image = cell.String()
 	case FieldPrice:
 		product.Price = cell.String()
+	case FieldCategory:
+		product.Category = cell.String()
 	}
 	return product
 }

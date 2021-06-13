@@ -19,6 +19,7 @@ type (
 		Handle       string
 		Title        string
 		Body         string
+		Category     string
 		Option1Name  string
 		Option1Value string
 		Option2Name  string
@@ -43,6 +44,7 @@ type (
 		Description          string
 		SKU                  string
 		Image                string
+		Category             string
 		Attribute1Name       string
 		Attribute1Value      string
 		Attribute1Visibility string
@@ -65,6 +67,7 @@ const (
 	FieldOption2Value string = "option_2_value"
 	FieldImage        string = "image"
 	FieldPrice        string = "price"
+	FieldCategory     string = "category"
 
 	// HEADERS FOR WOOCOMMERCE PRODUCTS
 	FieldType string = "type"

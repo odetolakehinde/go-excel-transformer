@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
+	splitCsv "github.com/tolik505/split-csv"
 	"strings"
 
-	"github.com/tealeg/xlsx"
+	"github.com/tealeg/xlsx/v3"
 )
 
 func main() {
 	var productsUploaded []shopifyProducts
 
-	wb, _ := xlsx.OpenFile("./mafo.xlsx")
+	wb, _ := xlsx.OpenFile("./omoo.xlsx")
 	wbSheet := wb.Sheets[0]
 	fmt.Printf("the max row is %v: ", wbSheet.MaxRow)
 
@@ -40,6 +41,7 @@ func main() {
 			Handle:       "",
 			Title:        "",
 			Body:         "",
+			Category:     "",
 			Option1Name:  "",
 			Option1Value: "",
 			Option2Name:  "",
@@ -68,4 +70,11 @@ func main() {
 	fmt.Printf("the length is %v: \n", len(productsUploaded))
 
 	convertToWoocommerceSyntax(productsUploaded)
+
+	// after the conversion, split the csv file into smaller ones.
+	fmt.Printf("start calling this function.")
+	splitter := splitCsv.New()
+	splitter.FileChunkSize = 500000 //in bytes (500KB)
+	result, _ := splitter.Split("./finally.csv", "./result")
+	fmt.Println(result)
 }
